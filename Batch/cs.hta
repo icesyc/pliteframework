@@ -1,0 +1,99 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<title>plite - createScript</title>
+<hta:application ID="cs"
+     applicationname="plite - createScript"
+     border="dialog"
+     borderstyle="normal"
+     caption="yes"
+     icon=""
+     maximizebutton="no"
+     minimizebutton="no"
+     showintaskbar="yes"
+     singleinstance="yes"
+     sysmenu="yes"
+     version="1.0"
+     windowstate="normal"
+    >
+
+<style>
+body{
+	background:#D6D3CE;
+	font-size:12px;
+	border:2px solid #D6D3CE;
+}
+#msg{
+	border:2px solid inset;
+	background:#FFF;
+	width:364px;
+	height:200px;
+	/*white-space:nowrap;*/
+	overflow:auto;
+	font:12px Courier New;
+}
+</style>
+<script language="javascript">
+var $ = document.getElementById;
+var winWidth = 396;
+var winHeight= 330;
+window.onload=function(){
+	window.resizeTo(winWidth,winHeight);
+	$('appPath').value = location.href.substring(8,location.href.lastIndexOf("/"));
+	window.moveTo((screen.width-winWidth)/2,(screen.height-winHeight)/2);
+}
+function check(){
+	if($('phpPath').value == '')
+	{
+		alert('请指定php.exe的路径!');
+		$('phpPath').focus();
+		return false;
+	}
+	if($('appPath').value == '')
+	{
+		alert('请指定应用程序的安装目录');
+		return false;
+	}
+	fso = new ActiveXObject("Scripting.FileSystemObject");
+	php = "php.exe";
+	if($('phpPath').value.indexOf(php) == -1)
+	{
+		alert('指定的路径不是有效的php.exe路径.');
+		return false;
+	}
+	if(!fso.FileExists($('phpPath').value))
+	{
+		alert('指定的php.exe文件不存在.');
+		return false;
+	}
+	if(!fso.FolderExists($('appPath').value))
+	{
+		alert('指定的应用程序目录不存在');
+		return false;
+	}
+	return true;
+}
+function run(){
+	if(!check())
+		return false;
+	php = $('phpPath').value;
+	path= $('appPath').value;
+	ws  = new ActiveXObject("WScript.Shell");
+	res = ws.exec(php + ' CreateScript.php ' + path);
+	while(!res.StdOut.AtEndOfStream)
+	{
+		$('msg').innerHTML += res.StdOut.readLine() + "<br/>";
+	}
+	
+}
+</script>
+</head>
+<body scroll="no">
+请指定php.exe的位置<br/>
+<input type="file" size="40" id="phpPath"/><br/>
+请指定应用程序的安装目录<br/>
+<input type="text" size="40" id="appPath"/>
+<input type="button" value="create" onclick="run()" style="width:70px;margin-left:-4px"/>
+<div id="msg"></div>
+</body>
+</html>

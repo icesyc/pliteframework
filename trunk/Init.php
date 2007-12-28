@@ -13,7 +13,7 @@
 /**
  *  Plite的版本
  */
-define("PLITE_VERSION", "1.8.3");
+define("PLITE_VERSION", "1.8.4");
 
 /**
  * 定义框架的根目录

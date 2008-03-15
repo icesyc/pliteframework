@@ -26,7 +26,7 @@
 	* @author Manuel 'EndelWar' Dalla Lana endelwar@aregar.it
 	* @version 1.2.1 03.07.2006
 	*
-	* CVS ID: $Id: SmartTemplate.php 202 2007-11-20 09:18:19Z icesyc $
+	* CVS ID: $Id$
 	*/
 	class SmartTemplate
 	{

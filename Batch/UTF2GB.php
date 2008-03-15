@@ -5,7 +5,7 @@
  * @package    Plite.Batch
  * @author     ice_berg16(寻梦的稻草人)
  * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: UTF2GB.php 193 2007-05-22 06:49:10Z icesyc $
+ * @version    $Id$
  */
 
 //先将文件进行编码转换

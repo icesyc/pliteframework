@@ -8,7 +8,7 @@
  * @package    Plite.Db
  * @author     ice_berg16(寻梦的稻草人)
  * @copyright  ice_berg16@163.com
- * @version    $Id: PDOMysqlDriver.php 192 2007-05-22 05:43:00Z icesyc $
+ * @version    $Id$
  */
 
 class PDOMysqlDriver extends PDO

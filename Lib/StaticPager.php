@@ -7,7 +7,7 @@
  * @package    Plite.Lib
  * @author     ice_berg16(Ñ°ÃÎµÄµ¾²ÝÈË)
  * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: StaticPager.php 204 2007-11-30 00:22:07Z icesyc $
+ * @version    $Id$
  */
 
 /**

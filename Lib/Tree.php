@@ -8,7 +8,7 @@
  * @package    Plite.Lib
  * @author     ice_berg16(寻梦的稻草人)
  * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: Tree.php 183 2007-04-24 06:08:01Z icesyc $
+ * @version    $Id$
  */
 
 class Tree

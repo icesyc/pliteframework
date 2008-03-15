@@ -7,7 +7,7 @@
  * @package    Plite.Lib
  * @author     ice_berg16(寻梦的稻草人)
  * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: FileSystem.php 146 2006-12-04 03:40:16Z icesyc $
+ * @version    $Id$
  */
 
 class FileSystem

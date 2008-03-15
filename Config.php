@@ -7,7 +7,7 @@
  * @package    Plite
  * @author     ice_berg16(寻梦的稻草人)
  * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: Config.php 170 2007-03-15 07:40:22Z icesyc $
+ * @version    $Id$
  */
 
 class Config

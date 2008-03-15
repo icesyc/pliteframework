@@ -7,7 +7,7 @@
  * @package    Plite
  * @author     ice_berg16(寻梦的稻草人)
  * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: Plite.php 171 2007-03-23 01:21:43Z icesyc $
+ * @version    $Id$
  */
 class Plite
 {

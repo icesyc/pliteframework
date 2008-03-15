@@ -7,7 +7,7 @@
  * @package    Plite.Db
  * @author     ice_berg16(寻梦的稻草人)
  * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: DataSource.php 159 2006-12-30 07:30:11Z icesyc $
+ * @version    $Id$
  */
 
 class DataSource

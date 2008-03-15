@@ -7,7 +7,7 @@
  * @package    Plite
  * @author     ice_berg16(寻梦的稻草人)
  * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: Controller.php 161 2006-12-30 08:44:37Z icesyc $
+ * @version    $Id$
  */
 
 class Controller

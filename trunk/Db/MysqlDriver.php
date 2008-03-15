@@ -8,7 +8,7 @@
  * @package    Plite.Db
  * @author     ice_berg16(寻梦的稻草人)
  * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: Mysql.php 155 2006-12-15 04:03:19Z icesyc $
+ * @version    $Id$
  */
 
 class MysqlDriver
@@ -403,7 +403,7 @@ class MysqlStatement
  * @package    Plite.Db
  * @author     ice_berg16(寻梦的稻草人)
  * @copyright  2004-2007 ice_berg16@163.com
- * @version    $Id: MysqlException.php 134 2006-11-30 03:29:08Z icesyc $
+ * @version    $Id$
  */
 
 class MysqlException extends Exception

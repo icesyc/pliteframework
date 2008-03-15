@@ -7,7 +7,7 @@
  * @package    Plite.Batch
  * @author     ice_berg16(寻梦的稻草人)
  * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: CreateScript.php 199 2007-09-08 01:17:05Z icesyc $
+ * @version    $Id$
  */
 
 if(!isset($argc) || $argc < 2)

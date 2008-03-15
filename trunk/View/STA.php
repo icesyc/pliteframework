@@ -7,7 +7,7 @@
  * @package    Plite.View
  * @author     ice_berg16(寻梦的稻草人)
  * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: STA.php 134 2006-11-30 03:29:08Z icesyc $
+ * @version    $Id$
  */
 
 require_once("Plite/View/SmartTemplate/class.smarttemplate.php");

@@ -7,7 +7,7 @@
  * @package    Plite.Lib
  * @author     ice_berg16(寻梦的稻草人)
  * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: ImageCode.php 208 2007-12-04 08:04:03Z icesyc $
+ * @version    $Id$
  */
 
 class ImageCode

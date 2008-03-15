@@ -7,7 +7,7 @@
  * @package    Exception
  * @author     ice_berg16(寻梦的稻草人)
  * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: ErrorProcessor.php 200 2007-10-16 05:23:30Z icesyc $
+ * @version    $Id$
  */
 
 class ErrorProcessor

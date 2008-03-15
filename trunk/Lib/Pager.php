@@ -7,7 +7,7 @@
  * @package    Plite.Lib
  * @author     ice_berg16(Ñ°ÃÎµÄµ¾²ÝÈË)
  * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: Pager.php 211 2007-12-07 07:28:59Z icesyc $
+ * @version    $Id$
  */
 
 class Pager

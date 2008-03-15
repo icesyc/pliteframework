@@ -7,7 +7,7 @@
  * @package    Plite.Lib
  * @author     ice_berg16(寻梦的稻草人)
  * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: Validator.php 186 2007-04-25 08:00:26Z icesyc $
+ * @version    $Id$
  */
 
 class Validator

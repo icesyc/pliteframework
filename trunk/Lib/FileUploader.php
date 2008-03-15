@@ -8,7 +8,7 @@
  * @package    Plite.Lib
  * @author     ice_berg16(寻梦的稻草人)
  * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: FileUploader.php 200 2007-10-16 05:23:30Z icesyc $
+ * @version    $Id$
  */
 
 class FileUploader
@@ -117,7 +117,7 @@ class FileUploader
  * @package    Plite.Lib
  * @author     ice_berg16(寻梦的稻草人)
  * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: FileUploader.php 200 2007-10-16 05:23:30Z icesyc $
+ * @version    $Id$
  */
 
 class UploadFile

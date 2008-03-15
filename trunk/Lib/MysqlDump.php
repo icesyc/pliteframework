@@ -7,7 +7,7 @@
  * @package    Plite.Lib
  * @author     ice_berg16(寻梦的稻草人)
  * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: MysqlDump.php 155 2006-12-15 04:03:19Z icesyc $
+ * @version    $Id$
  */
 
 /**

@@ -7,7 +7,7 @@
  * @package    Plite.Config
  * @author     ice_berg16(寻梦的稻草人)
  * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: DefaultConfig.php 209 2007-12-05 02:51:55Z icesyc $
+ * @version    $Id$
  */
 
 

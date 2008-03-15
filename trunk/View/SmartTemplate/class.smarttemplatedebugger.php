@@ -8,7 +8,7 @@
 	* @author Manuel 'EndelWar' Dalla Lana endelwar@aregar.it
 	* @version 1.2.1 03.07.2006
 	*
-	* CVS ID: $Id: class.smarttemplatedebugger.php,v 1.5 2006/07/02 22:17:15 endelwar Exp $
+	* CVS ID: $Id$
 	*/
 	class SmartTemplateDebugger
 	{

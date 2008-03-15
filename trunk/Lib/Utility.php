@@ -7,7 +7,7 @@
  * @package    Plite.Lib
  * @author     ice_berg16(寻梦的稻草人)
  * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: Utility.php 182 2007-04-21 09:27:39Z icesyc $
+ * @version    $Id$
  */
 
 class Utility

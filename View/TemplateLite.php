@@ -1,21 +1,21 @@
 <?php
 /**
- * STA
+ * TemplateLite
  *
- * 实现smartTemplate的适配器
+ * 实现TemplateLite的适配器
  *
  * @package    Plite.View
  * @author     ice_berg16(寻梦的稻草人)
- * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: STA.php 134 2006-11-30 03:29:08Z icesyc $
+ * @copyright  2004-2008 uustone@126.com
+ * @version    $Id: TemplateLite.php 134 2006-11-30 03:29:08Z icesyc $
  */
 
-require_once("Plite/View/SmartTemplate/class.smarttemplate.php");
+require_once("Plite/View/TemplateLite/class.template.php");
 require_once("Plite/View/TemplateInterface.php");
 
-class STA implements TemplateInterface
+class TemplateLite implements TemplateInterface
 {
-	//smartTemplate模板对象
+	//templateLite模板对象
 	private $tpl;
 
 	/**
@@ -23,9 +23,9 @@ class STA implements TemplateInterface
 	 */
 	public function __construct()
 	{
-		$this->tpl = new SmartTemplate;
+		$this->tpl = new Template_Lite;
 		$this->tpl->template_dir = Config::get("viewPath") . DS;
-		$this->tpl->temp_dir     = Config::get("cachePath") . DS;
+		$this->tpl->compile_dir  = Config::get("cachePath") . DS;
 		$this->tpl->cache_dir    = Config::get("cachePath") . DS;
 	}
 	
@@ -35,11 +35,11 @@ class STA implements TemplateInterface
 	 * @param $cacheLifeTime 缓存时间
 	 */
 	public function enableCache($cacheLifeTime=null)
-	{	
+	{
 		if(is_null($cacheLifeTime))
 			$cacheLifeTime = Config::get("cacheLifeTime");
+		$this->tpl->cache = true;
 		$this->tpl->cache_lifetime = $cacheLifeTime;
-		$this->tpl->use_cache();
 	}
 
 	/**
@@ -59,8 +59,8 @@ class STA implements TemplateInterface
 	 */
 	public function display($tpl)
 	{
-		$this->tpl->set_templatefile(basename($tpl));
-		$this->tpl->output();
+		$file = basename($tpl);
+		$this->tpl->display($tpl);
 	}
 }
 ?>

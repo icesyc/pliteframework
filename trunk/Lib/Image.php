@@ -55,7 +55,7 @@ class Image
 	 */
 	public function save($path)
 	{
-		$this->_output($path);
+		return $this->_output($path);
 	}
 
 	/**
@@ -65,7 +65,7 @@ class Image
 	 */
 	public function output($type='gif')
 	{		
-		$this->_output('stream', $type);
+		return $this->_output('stream', $type);
 	}
 
 	/**
@@ -82,6 +82,7 @@ class Image
 		$this->info = array_combine($key, array_slice(getimagesize($file), 0, 3));
 		$this->info['file'] = $file;
 		$this->img = imagecreatefromstring($string);
+		return $this;
 	}
 
 	/**
@@ -116,7 +117,7 @@ class Image
 		$this->img = $newimg;
 		$this->info['width'] = $width;
 		$this->info['height'] = $height;
-		return array($width, $height);
+		return $this;
 	}
 
 	/**
@@ -176,7 +177,8 @@ class Image
 		}else{			
 			$this->resize($destw, $desth);
 		}
-		if($path)$this->save($path);
+		if($path) return $this->save($path);
+		return $this;
 	}
 
 	/**
@@ -197,7 +199,7 @@ class Image
 		$this->img = $newimg;
 		$this->info['width'] = $w;
 		$this->info['height'] = $h;
-		return $this->img;
+		return $this;
 	}
 
 	/**
@@ -218,6 +220,7 @@ class Image
 				imagecopyresampled($this->img,$this->img, sin($i/10)*$grade,$i-2,0,$i,$w,2,$w,2);
 			}
 		}
+		return $this;
 	}
 
 	/**
@@ -256,7 +259,8 @@ class Image
 		//填充文字
 		$texty = $mheight - $bgheight/2 + $textheight/2;
 		imagettftext($this->img, $size, 0, 20, $texty, $color, $font, $text);
-		if($path) $this->save($path);
+		if($path) return $this->save($path);
+		return $this;
 	}
 
 	/**
@@ -285,7 +289,9 @@ class Image
 		if($markw > $srcw || $markh > $srch)
 		{
 			//先将水印图片调整到原始图片大小-10个像素
-			list($markw, $markh) = $mark->resize($srcw-10, $srch-10, true);
+			$mark->resize($srcw-10, $srch-10, true);
+			$markw = $mark->getWidth();
+			$markh = $mark->getHeight();
 		}
 	
 		//判断水印位置
@@ -303,7 +309,8 @@ class Image
 			imagecopymerge($this->img, $mark->getResource(), $x, $y, 0, 0, $markw, $markh, $pct);
 		}
 		unset($mark);
-		if($path) $this->save($path);
+		if($path) return $this->save($path);
+		return $this;
 	}
 
 	//返回由16进制组成的颜色索引
@@ -361,7 +368,7 @@ class Image
 				header("Content-type:image/".$type);
 			call_user_func($func, $this->img);
 		}
-		imagedestroy($this->img);
+		return $this;
 	}
 }
 ?>

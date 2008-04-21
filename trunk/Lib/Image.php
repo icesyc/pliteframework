@@ -125,8 +125,6 @@ class Image
 	 *
 	 * @param int $width 宽度
 	 * @param int $height 高度
-	 * @param boolean $crop 是否对超出部分进行裁剪,默认为是, 如果不裁剪,则缩图将等比缩放至小于目标尺寸
-	 * @param string $path 要生成的新文件名
 	 */
 	private function _createAlphaImage($width, $height){
 		$newimg = imagecreatetruecolor($width, $height);
@@ -152,29 +150,39 @@ class Image
 	 * @param int $width 宽度
 	 * @param int $height 高度
 	 * @param boolean $crop 是否对超出部分进行裁剪,默认为是, 如果不裁剪,则缩图将等比缩放至小于目标尺寸
+	 * @param boolean $center crop时是否在中间裁剪
 	 * @param string $path 要生成的新文件名
 	 */
-	public function thumbnail($width=128,$height=128, $crop=true, $path=null) 
+	public function thumbnail($width=128,$height=128, $crop=true, $center=true, $path=null) 
 	{
 
 		$destw  = min($this->getWidth(), $width);
 		$desth = min($this->getHeight(), $height);
 		if($crop){
 			$srcw = $this->getWidth();
-			$srch = $this->getHeight();
-			//原始宽高比大于目标宽高比,调整高度
+			$srch = $this->getHeight();			
+			$x = $y = 0;
 			if((double)($srcw/$srch) > (double)($width/$height))
 			{
-				//等比缩小到目标高度,宽度超出部分将被裁剪
-				$destw = ceil($srcw * $height / $srch);
+				//计算应COPY的宽度
+				$srcw = ceil($width * $srch/ $height);
+				//计算起始的x坐标
+				if($center) $x = ceil(($this->getWidth() - $srcw) / 2);
 			}else{
-				///等比缩小到目标宽度,高度超出部分将被裁剪
-				$desth = ceil($srch * $width / $srcw);
+				//计算应COPY的高度
+				$srch = ceil($height * $srcw / $width);
+				//计算起始的y坐标
+				if($center) $y = ceil(($this->getHeight() - $srch) / 2);
 			}
-			$this->resize($destw, $desth);
-			//将超出部分进行裁
-			$this->crop(0, 0, $width, $height);
-		}else{			
+			//创建一个透明背景的图像
+			$newimg = $this->_createAlphaImage($width, $height);
+			//将原始重新采样复制到透明背景上
+			imagecopyresampled($newimg, $this->img, 0, 0, $x, $y, $width, $height, $srcw, $srch);
+			imagedestroy($this->img);
+			$this->img = $newimg;
+			$this->info['width'] = $width;
+			$this->info['height'] = $height;
+		}else{
 			$this->resize($destw, $desth);
 		}
 		if($path) return $this->save($path);

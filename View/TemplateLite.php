@@ -60,7 +60,7 @@ class TemplateLite implements TemplateInterface
 	public function display($tpl)
 	{
 		$file = basename($tpl);
-		$this->tpl->display($tpl);
+		$this->tpl->display($file);
 	}
 }
 ?>

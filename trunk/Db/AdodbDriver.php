@@ -1,10 +1,10 @@
 <?php
 /**
- * summary	adodbµÄ½Ó¿Ú£¬ÐèÒªÏÂÔØadodb5.04·Å½âÑ¹µ½Plite/DbÄ¿Â¼ÏÂ
+ * summary	adodbçš„æŽ¥å£ï¼Œéœ€è¦ä¸‹è½½adodb5.04æ”¾è§£åŽ‹åˆ°Plite/Dbç›®å½•ä¸‹
  * 
  * 
  * @package    
- * @author     ice_berg16(Ñ°ÃÎµÄµ¾²ÝÈË)
+ * @author     ice_berg16(å¯»æ¢¦çš„ç¨»è‰äºº)
  * @copyright  ice_berg16@163.com
  * @version    $Id$
  */

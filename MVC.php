@@ -50,22 +50,25 @@ class MVC
 		{
 			set_exception_handler(Config::get("exceptionHandler"));
 		}
-
+		
 		//加载MVC所必须的文件
+		Plite::load("Plite.Router");
 		Plite::load("Plite.Dispatcher");
 		Plite::load("Plite.Controller");
 		Plite::load("Plite.Model");
 		Plite::load("Plite.View");
+		
+		//建立路由
+		Router::setup();
 
 		//加载用户配置的调度器
 		$dsp = Config::get("dispatcher");
 		Plite::load($dsp);
+
 		//取得类名
 		$class = array_pop(explode(".", $dsp));
 		$dispatcher = new $class();
-		//保存到共享对象中
-		Plite::set(DISPATCHER_KEY, $dispatcher);
-
+		Plite::set("dispatcher", $dispatcher);
 		//执行调度
 		$dispatcher->dispatch();
 	}

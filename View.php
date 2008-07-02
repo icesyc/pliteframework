@@ -13,9 +13,7 @@
 class View
 {
 	//视图数据
-	public $viewData;
-	//视图布局
-	private $layout;
+	public $data;
 	//视图文件名称
 	private $name;
 	//是否缓存页面
@@ -24,27 +22,10 @@ class View
 	private $cacheLifeTime;
 
 	/**
-	 * 构造函数
-	 * @param object $controller 
-	 */
-	public function __construct()
-	{}
-	
-	//构造数据
-	public function construct($name, $viewData, $layout)
-	{
-		$this->name		= $name;
-		$this->viewData = $viewData;
-		$this->layout   = $layout;
-	}
-
-	/**
 	 * 渲染并显示页面 
 	 */
 	public function render()
 	{
-		$this->renderLayout();
-
 		if(Config::get("viewEngine") == 'php')
 		{
 			echo $this->fetch();
@@ -55,12 +36,32 @@ class View
 			$tpl = $this->loadEngine(Config::get("viewEngine"));
 			if($this->wantCache)
 				$tpl->enableCache($this->cacheLifeTime);
-			$tpl->assign($this->viewData);
+			$tpl->assign($this->data);
 			$tpl->display($this->getViewFile());
 			return true;
 		}
 	}
 	
+	/*
+	 * 设置一个视图变量 
+	 *
+	 * @param array|string 当为array时为一个变量数组，否则为变量的键值
+	 * @param mixed 变量值
+	 */
+	public function __set($key, $value=null){
+		
+	}
+
+	/*
+	 * 设置一个视图文件
+	 *
+	 * @param string $f 文件名称
+	 */
+	public function setFile($f)
+	{
+		$this->$fname = $f;
+	}
+
 	/*
 	 * 载入模板引擎 
 	 *
@@ -73,17 +74,6 @@ class View
 			throw Exception( "指定的模板引擎 <span class='red'>$engine</span> 不存在，加载失败。");
 		require_once($path);
 		return new $engine;
-	}
-
-	/*
-	 * 取得布局文件的完整路径 
-	 *
-	 * @param string $layoutName 
-	 */
-	private function getLayoutFile($layoutName)
-	{
-		$path = Config::get("layoutPath") . DS . $layoutName . "." . Config::get("layoutExt");
-		return $this->checkFile($path, 'layout');
 	}
 
 	/*
@@ -105,12 +95,10 @@ class View
 	 * @param string $f
 	 * @param $type 'layout' 布局 'view' 视图
 	 */
-	private function checkFile($f, $type='view')
+	private function checkFile($f)
 	{
-
-		$text = $type == 'view' ? '视图' : '布局';
 		if(!file_exists($f))
-			throw new Exception("指定的{$text}文件 <span class='red'>$f</span> 不存在，加载失败");
+			throw new Exception("指定的视图文件 <span class='red'>$f</span> 不存在，加载失败");
 		return $f;
 	}
 
@@ -127,7 +115,7 @@ class View
 	public function fetch()
 	{		
 		ob_start();	
-		extract($this->viewData);	
+		extract($this->data);	
 		require($this->getViewFile());
 		$content = ob_get_contents();		
 		ob_end_clean();
@@ -140,23 +128,6 @@ class View
 		return $content;
 	}
 	
-	/**
-	 * 渲染缓存页面 
-	 *
-	 * 有缓存页面时输出缓存，返回true，否则返回false
-	 */
-	public function renderCache()
-	{
-		$f = $this->getCacheFile();
-		if($this->wantCache && $this->isCached($f))
-		{
-			echo file_get_contents($f);
-			exit;
-			//return true;
-		}
-		return false;
-	}
-
 	/**
 	 * 生成缓存文件名
 	 */
@@ -182,20 +153,6 @@ class View
 			return false;
 		}
 		return true;
-	}
-
-	/*
-	 * @todo 渲染布局 
-	 */
-	public function renderLayout()
-	{		
-		if(!is_array($this->layout)) return false;
-		foreach( $this->layout as $k => $v )
-		{	
-			if(!is_readable($this->getLayoutFile($v)))
-				throw new Exception( "指定的布局 <span class='red'>$engine</span> 不存在，加载失败。");
-			$this->viewData[$k] = file_get_contents($this->getLayoutFile($v));
-		}
 	}
 }
 ?>

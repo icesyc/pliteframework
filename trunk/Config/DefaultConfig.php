@@ -17,10 +17,6 @@ return array(
 	"CTL"				=> "C",
 	//动作的名称
 	"ACT"				=> "A",
-	//默认的控制器
-	"defaultController"	=> "index",
-	//默认的动作
-	"defaultAction"		=> "index",	
 	//定义控制器前缀
 	"controllerPrefix"	=> "C_",
 	//定义model前缀
@@ -57,6 +53,10 @@ return array(
 		"charset"	=> ""
 	),
 
+	//路由设置
+	'router'			=> array(
+		'default'	=> 'index',
+	),
 	/**
 	 * RBAC的事件设置，每个事件可以指定一个包含controller,action的数组或一个函数
 	 * 如'onLogin' => array('user', 'login')，'onValidateFailed' => 'callback_function'

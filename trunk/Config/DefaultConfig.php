@@ -23,18 +23,12 @@ return array(
 	"modelPrefix"		=> "M_",
 	//数据表前缀
 	"tablePrefix"		=> "plite_",
-	//视图文件的扩展名
-	"viewExt"			=> "htm",
-	//布局文件的扩展名
-	"layoutExt"			=> "htm",
 	//使用的模板引擎
 	"viewEngine"		=> "php",
 	//默认的编译模板缓存时间(单位:秒)
 	"cacheLifeTime"		=> 30*60*60*24,
 	//使用的控制器
 	"dispatcher"		=> "Plite.Dispatcher",
-	//url模式
-	"urlMode"			=> "pathInfo",
 	//是否启用session
 	"sessionStart"		=> false,
 	//发送编码
@@ -54,9 +48,13 @@ return array(
 	),
 
 	//路由设置
-	'router'			=> array(
+	'router'		=> array(
 		'default'	=> 'index',
 	),
+
+	//自动加载的钩子,钩子文件路径列表
+	'hooks'			=> array(),
+
 	/**
 	 * RBAC的事件设置，每个事件可以指定一个包含controller,action的数组或一个函数
 	 * 如'onLogin' => array('user', 'login')，'onValidateFailed' => 'callback_function'
@@ -78,10 +76,6 @@ return array(
 
 		//ACL的存放位置,如果为文件,则需要指定文件路径
 		'aclPath'		   => 'database',
-		//不具有任何角色的名称, 该值用来指定ACL文件中对应的键名
-		'noneRole'		   => 'none',
-		//具有任何角色的名称, 该值用来指定ACL文件中对应的键名
-		'defaultRole'	   => 'default',
 	)
 );
 ?>

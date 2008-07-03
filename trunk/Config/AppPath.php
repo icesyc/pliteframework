@@ -20,7 +20,6 @@ return array(
 	'controllerPath'	=> APP_ROOT . DS . "controller",
 	"modelPath"			=> APP_ROOT . DS . "model",
 	"viewPath"			=> APP_ROOT . DS . "view",
-	"layoutPath"		=> APP_ROOT . DS . "view" . DS . "layout",
 	"cachePath"			=> APP_ROOT . DS . "cache",	
 );
 ?>

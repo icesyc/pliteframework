@@ -28,12 +28,9 @@ class RBACDispatcher extends Dispatcher
 		Plite::load($userPath);
 		Plite::load("Plite.Lib.RBAC.RBAC");
 		
-		//检查权限
-		$param = $this->parseParam();
-		
 		$user = new $userClass();
 		$roleId = $user->getRole();
-		if(RBAC::validate($roleId, $param['controller'], $param['action']))
+		if(RBAC::validate($roleId, Router::$controller, Router::$action))
 		{
 			parent::dispatch();
 		}
@@ -66,19 +63,13 @@ class RBACDispatcher extends Dispatcher
 		$eventHandler = Config::get("RBAC." . $event);
 		if(is_array($eventHandler))
 		{
-			list($controller, $action) = $eventHandler;
-			$this->setController($controller);
-			$this->setAction($action);
+			list(Router::$controller, Router::$action) = $eventHandler;
 			parent::dispatch();
 		}
 		elseif(is_callable($eventHandler))
 		{
 			call_user_func($eventHandler, $event);
 		}
-		else
-		{			
-			throw new Exception("执行 <span class='red'>$event</span> 时发生错误, <span class='red'>$event</span> 不可执行");
-		}		
 		return true;
 	}
 }

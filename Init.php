@@ -13,27 +13,18 @@
 /**
  *  Plite的版本
  */
-define("PLITE_VERSION", "1.8.4");
+define("PLITE_VERSION", "1.9.0");
 
 /**
  * 定义框架的根目录
  */
 define("PLITE_ROOT", dirname(__FILE__));
 
-/**
- * 目录分隔符的短写
- */
-define("DS", "/");
-
-/**
- * 前端控制器保存在共享对象中的键名
- */
-define("DISPATCHER_KEY", "__Dispatcher__");
-
 //加载基本文件
-require_once(PLITE_ROOT . "/Plite.php");
-require_once(PLITE_ROOT . "/Config.php");
-require_once(PLITE_ROOT . "/Exception/ErrorProcessor.php");
+require(PLITE_ROOT . "/Plite.php");
+require(Plite_ROOT . "/Event.php");
+require(PLITE_ROOT . "/Config.php");
+require(PLITE_ROOT . "/Exception/ErrorProcessor.php");
 
 //加载默认的配置文件
 Config::import(PLITE_ROOT . "/Config/DefaultConfig.php");

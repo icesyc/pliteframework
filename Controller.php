@@ -20,11 +20,9 @@ class Controller
 
 	public function __construct()
 	{	
-		$this->view = new View();
-
 		//指定视图文件名称，默认为当前的action
 		$viewFile = Router::$controller . "_" . Router::$action;
-		$this->view->setFile($viewFile);
+		$this->view = new View($viewFile);
 	}
 
 	/*

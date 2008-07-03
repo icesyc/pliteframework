@@ -22,7 +22,7 @@ class Plite
 	//注册一个共享对象
 	public static function set($key, $obj)
 	{
-		if(array_key_exists($key, self::$collection))
+		if(self::exists($key))
 			throw new Exception("Plite: 名称为 <span class='red'>$key</span> 的对象已经被注册.");
 		self::$collection[$key] = $obj;
 	}
@@ -74,13 +74,13 @@ class Plite
 	//载入类
 	public static function load($class, $dir=null)
 	{
-		$path = str_replace(".", DS, $class) . ".php";
+		$path = str_replace(".", "/", $class) . ".php";
 		
 		if($dir)
 		{
 			if(!is_dir($dir))
 				throw new Exception("Plite: 指定的目录 <span class='red'>$dir</span> 不存在");
-			$path = $dir . DS . $path;
+			$path = $dir . "/" . $path;
 		}
 		
 		if(self::isReadable($path))
@@ -105,7 +105,7 @@ class Plite
 	
 		if(!array_key_exists($name, self::$libs))
 		{
-			self::load("Plite".DS."Lib".DS.$name);
+			self::load("Plite/Lib/".$name);
 			//通过反射实现变参数的class实例化
 			$rc = new ReflectionClass($name);
 			self::$libs[$name] = call_user_func_array(array($rc, 'newInstance'), $param);
@@ -127,10 +127,10 @@ class Plite
 			if(!array_key_exists($model, self::$models))
 			{
 				$model = Config::get("modelPrefix") . $model;
-				$path = Config::get("modelPath") . DS . $model . ".php";
+				$path = Config::get("modelPath") . "/" . $model . ".php";
 				if(!file_exists($path))
 					throw new Exception(sprintf("系统加载 <span class='red'>%s</span> 时失败，未找到Model文件.", $path));
-				require_once($path);
+				require($path);
 				if(!class_exists($model))
 					throw new Exception(sprintf("在 <span class='red'>%s</span> 中找不到 <span class='red'>%s</span> 类.", $path, $model));
 				self::$models[$model] = new $model();

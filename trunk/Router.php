@@ -7,7 +7,7 @@
  * @package    Plite
  * @author     ice_berg16(寻梦的稻草人)
  * @copyright  2004-2006 ice_berg16@163.com
- * @version    $Id: Dispatcher.php 4 2008-03-15 13:15:42Z icesyc $
+ * @version    $Id$
  */
 
 class Router

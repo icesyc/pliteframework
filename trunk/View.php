@@ -20,22 +20,59 @@ class View
 	private $wantCache;
 	//缓存时间
 	private $cacheLifeTime;
+	//模板引擎
+	public static $engine = 'php';
+	//模板目录
+	public static $directory = 'view';
+	//缓存目录
+	public static $cachePath = 'cache';
+
+	/**
+	 * 构造函数
+	 *
+	 * @param string $file 视图文件
+	 */
+	public function __construct($file=null){
+		is_null($file) or $this->name = $file;
+	}
+
+	/**
+	 * 设置模板引擎 
+	 */
+	public function setEngine($engine){
+		self::$engine = $engine;
+	}
+
+	/**
+	 * 设置模板目录 
+	 */
+	public function setDirectory($dir){
+		self::$directory = $dir;
+	}
+	
+	/**
+	 * 设置模板目录 
+	 */
+	public function setCachePath($dir){
+		self::$cachePath = $dir;
+	}
 
 	/**
 	 * 渲染并显示页面 
 	 */
-	public function render()
+	public function render($file=null)
 	{
-		if(Config::get("viewEngine") == 'php')
+		is_null($file) or $this->name = $file;
+
+		if(self::$engine == 'php')
 		{
 			echo $this->fetch();
 			return true;
 		}
 		else
 		{
-			$tpl = $this->loadEngine(Config::get("viewEngine"));
-			if($this->wantCache)
-				$tpl->enableCache($this->cacheLifeTime);
+			$tpl = $this->loadEngine(self::$engine);
+			$this->wantCache and $tpl->enableCache($this->cacheLifeTime);
 			$tpl->assign($this->data);
 			$tpl->display($this->getViewFile());
 			return true;
@@ -49,7 +86,22 @@ class View
 	 * @param mixed 变量值
 	 */
 	public function __set($key, $value=null){
-		
+		if(is_array($key))
+		{
+			$this->data = array_merge($this->data, $key);
+		}
+		else
+		{
+			$this->data[$key] = $value;
+		}
+	}
+
+	/*
+	 * 用于转换成字符串
+	 *
+	 */
+	public function __toString(){
+		return $this->render();
 	}
 
 	/*
@@ -59,7 +111,7 @@ class View
 	 */
 	public function setFile($f)
 	{
-		$this->$fname = $f;
+		$this->name = $f;
 	}
 
 	/*
@@ -69,7 +121,7 @@ class View
 	 */
 	private function loadEngine($engine)
 	{
-		$path = PLITE_ROOT . DS . "View" . DS . $engine . ".php";
+		$path = dirname(__FILE__) . "/View/" . $engine . ".php";
 		if(!file_exists($path))
 			throw Exception( "指定的模板引擎 <span class='red'>$engine</span> 不存在，加载失败。");
 		require_once($path);
@@ -83,9 +135,8 @@ class View
 	 */
 	private function getViewFile($name=null)
 	{
-		if(is_null($name))
-			$name = $this->name;
-		$path = Config::get("viewPath") . DS . $name . "." . Config::get("viewExt");
+		is_null($name) and $name = $this->name;
+		$path = self::$directory . "/" . $name . ".htm";
 		return $this->checkFile($path);
 	}
 
@@ -114,7 +165,7 @@ class View
 	 */
 	public function fetch()
 	{		
-		ob_start();	
+		ob_start();
 		extract($this->data);	
 		require($this->getViewFile());
 		$content = ob_get_contents();		
@@ -133,7 +184,7 @@ class View
 	 */
 	public function getCacheFile()
 	{
-		return Config::get("cachePath") . DS . "cache_" . md5($_SERVER['REQUEST_URI'].$this->name.$this->cacheLifeTime);
+		return self::$cachePath . "/cache_" . md5($_SERVER['REQUEST_URI'].$this->name.$this->cacheLifeTime);
 	}
 
 	/**
@@ -141,8 +192,9 @@ class View
 	 *
 	 * @param string $file
 	 */
-	private function isCached($file)
+	private function isCached($file=null)
 	{
+		is_null($file) and $file = $this->getCacheFile();
 
 		if(!file_exists($file))
 			return false;

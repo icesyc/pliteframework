@@ -73,7 +73,7 @@ class Config
 	{
 		if(!file_exists($configFile))
 			throw new Exception(sprintf("配置文件不存在 -> <span class='red'>%s</span>",$configFile));
-		$ini = require_once($configFile);
+		$ini = require($configFile);
 		if(is_array($ini))
 		{
 			self::$ini = array_merge(self::$ini, $ini);

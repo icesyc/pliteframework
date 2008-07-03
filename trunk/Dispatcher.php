@@ -18,8 +18,6 @@ class Dispatcher
 	 */
 	public function dispatch()
 	{
-
-		Event::run("system.dispatching");
 		//加上控制器前缘
 		$controller = Config::get("controllerPrefix") . Router::$controller;
 		$file = Router::$directory . DS . $controller . ".php";
@@ -27,7 +25,7 @@ class Dispatcher
 		if(!file_exists($file))
 			throw new Exception("请求的控制器 <span class='red'>$file::$controller</span> 不存在。");
 
-		require_once($file);
+		require($file);
 
 		Event::run("system.preController");
 

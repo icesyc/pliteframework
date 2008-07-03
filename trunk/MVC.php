@@ -26,6 +26,12 @@ class MVC
 	 */
 	public static function run()
 	{
+		//加载系统钩子
+		if($hooks = Config::get("hooks")){
+			foreach($hooks as $hook){
+				file_exists($hook) and require_once($hook);
+			}
+		}
 		
 		//自动启用session
 		if(Config::get("sessionStart"))
@@ -58,6 +64,12 @@ class MVC
 		Plite::load("Plite.Model");
 		Plite::load("Plite.View");
 		
+		View::$directory = Config::get("viewPath");
+		View::$engine	 = Config::get("viewEngine");
+		View::$cachePath = Config::get("cachePath");
+
+		Event::run("system.routing");
+
 		//建立路由
 		Router::setup();
 
@@ -69,7 +81,9 @@ class MVC
 		$class = array_pop(explode(".", $dsp));
 		$dispatcher = new $class();
 		Plite::set("dispatcher", $dispatcher);
+
 		//执行调度
+		Event::run("system.dispatching");
 		$dispatcher->dispatch();
 	}
 }

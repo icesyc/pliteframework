@@ -28,11 +28,10 @@ class RBAC
 			Plite::load("Plite.Lib.RBAC.Role");
 			$role = new Role();
 			if($roleId === false){
-				$roleId = Config::get("RBAC.noneRole");
-				return $role->checkAct($roleId, $controller, $action);
+				return $role->checkAct('none', $controller, $action);
 			}
 			//查找当前角色和默认角色是否有该权限
-			$roleId = array($roleId, Config::get("RBAC.defaultRole"));
+			$roleId = array($roleId, 'default');
 			return $role->checkAct($roleId, $controller, $action);
 		}
 		else{
@@ -54,19 +53,13 @@ class RBAC
 		$act = require($path);
 		//没有任何角色的用户
 		if($roleId === false) {
-			$role = Config::get("RBAC.noneRole");
-			return isset($act[$role]) ? $act[$role] : array();
+			return isset($act['none']) ? $act['none'] : array();
 		}
 		if(isset($act[$roleId])){
 			return $act[$roleId];
 		}
 		else{
-			if(isset($act[Config::get("RBAC.defaultRole")])){
-				return $act[Config::get("RBAC.defaultRole")];
-			}
-			else{
-				return array();
-			}
+			return isset($act['default']) ? $act['default'] : array();
 		}
 	}
 

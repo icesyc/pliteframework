@@ -22,7 +22,7 @@ define("PLITE_ROOT", dirname(__FILE__));
 
 //加载基本文件
 require(PLITE_ROOT . "/Plite.php");
-require(Plite_ROOT . "/Event.php");
+require(PLITE_ROOT . "/Event.php");
 require(PLITE_ROOT . "/Config.php");
 require(PLITE_ROOT . "/Exception/ErrorProcessor.php");
 

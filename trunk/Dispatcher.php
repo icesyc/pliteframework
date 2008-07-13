@@ -20,7 +20,7 @@ class Dispatcher
 	{
 		//加上控制器前缘
 		$controller = Config::get("controllerPrefix") . Router::$controller;
-		$file = Router::$directory . DS . $controller . ".php";
+		$file = Router::$directory . "/" . $controller . ".php";
 		
 		if(!file_exists($file))
 			throw new Exception("请求的控制器 <span class='red'>$file::$controller</span> 不存在。");
@@ -33,7 +33,7 @@ class Dispatcher
 		if(!method_exists($ctl, Router::$action))
 			throw new Exception("请求的控制器 <span class='red'>$file::$controller</span> 不存在动作 <span class='red'>$action</span>。");
 		//执行action
-		$ctl->$action();
+		call_user_func(array($ctl, Router::$action));
 		
 		$ctl->autoRender and $ctl->renderView();
 

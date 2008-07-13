@@ -17,9 +17,9 @@ return array(
 
 	//一些基本的路径设置
 	'appRoot'			=> APP_ROOT,
-	'controllerPath'	=> APP_ROOT . DS . "controller",
-	"modelPath"			=> APP_ROOT . DS . "model",
-	"viewPath"			=> APP_ROOT . DS . "view",
-	"cachePath"			=> APP_ROOT . DS . "cache",	
+	'controllerPath'	=> APP_ROOT . "/controller",
+	"modelPath"			=> APP_ROOT . "/model",
+	"viewPath"			=> APP_ROOT . "/view",
+	"cachePath"			=> APP_ROOT . "/cache",	
 );
 ?>
